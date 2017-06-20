@@ -22,7 +22,7 @@
        header('Location: subpage/dane.txt');
     }
     else{
-        header('Location: index.php?id=start');	
+        header('Location: index.php?id=subpage/start');	
     }
 ?>
 

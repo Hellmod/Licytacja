@@ -1,5 +1,5 @@
 <?php
-	
+	/*
 	if(isset($_SESSION['Login']))
 	{
 		if ($_SESSION['Typ']=='Admin')
@@ -9,4 +9,5 @@
 		else		
 			require('start.php');
 	}
+	*/
 ?>

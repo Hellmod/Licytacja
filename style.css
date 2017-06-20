@@ -1,8 +1,11 @@
+body{
+	background: #ffffff;
+}
+
 #container{
 	width: 1000px;
 	margin-left: auto;
-	margin-right: auto;
-	
+	margin-right: auto;	
 }
 
 #logowanie{
@@ -28,7 +31,6 @@
 }
 
 #content{
-	text-align: center;
 	border: 2px solid #000000;
 }
 
@@ -37,10 +39,33 @@ table{
 	text-align: left; 
 }
 
-#auction{
-
+.auction{
+	height: 150px;
+	margin: 10px;
+	border: 2px solid #0000aa;
+	padding: 3px;
 }
 
-#a_graphics{
-	
+.auction a{
+	width: 100%;
+	height: 100%;
+	text-decoration: none;
+	color: #000000;
+	display: block;
+}
+
+#a_graphics img{
+	width: 250px;
+	height: 150px;
+	float: left;
+}
+
+#a_message{
+	float: left;
+	width:700px;
+	padding: 5px;
+}
+
+#a_message h3{
+	margin-bottom: 5px;
 }

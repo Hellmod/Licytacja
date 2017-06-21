@@ -4,13 +4,15 @@
 ?>
 
 	<div class="auction" onclick= "Location: index.php?id=Test">
-	<a href="index.php?id=auction/Krotkofalowka">
-		<?php require('auction/Krotkofalowka_head.php');?>	
-		</div>
-	</a>
+		<a href="index.php?id=auction/Krotkofalowka">
+			<?php require('auction/Krotkofalowka_head.php');?>	
+		</a>
+	</div>
+
 	<div class="auction">
-	<?php require('auction/Obudowa_head.php');?>
-	
+		<a href="index.php?id=auction/Obudowa">
+			<?php require('auction/Obudowa_head.php');?>
+		</a>
 	</div>
 
 

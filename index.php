@@ -68,8 +68,19 @@
 <div id="menu">
 <a href="index.php?id=subpage/test">tset</a>
 <a href="index.php?id=subpage/downolad">downolad</a>
+<a href="index.php?id=subpage/start">licytacje</a>
+</div>
+	<div id="content">
+		<?php
+			@$i=$_GET['id'];
+			if(!isset($i))	require('subpage/start.php');
+			else 			require($i.'.php');
+			
+		?>
+	</div>
+</div>
 
-<form id="id_kolor" method="post" action="">
+<form id="id_kolor" method="post" action="" style="	position: absolute;	left: 0;top: 0;">
 	<input type="color" name="kolor" value="#ffffff" onchange="zmien_kolor()"/>
 </form>
 <script>
@@ -82,15 +93,6 @@
 		document.body.style.background = document.cookie.substring(0, 7);
 	}
 </script>
-</div>
-	<div id="content">
-		<?php
-			@$i=$_GET['id'];
-			if(!isset($i))	require('subpage/start.php');
-			else 			require($i.'.php');
-			
-		?>
-	</div>
-</div>
+
 </body>
 </html>

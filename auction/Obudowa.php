@@ -1,9 +1,8 @@
 <?php
-    $nazwa_pliku="Krotkofalowka";
+    $nazwa_pliku="Obudowa";
     $wykonaj=mysql_query('SELECT Cena,Do_kiedy,Wygrywajacy from licytacje where Nazwa="'.$nazwa_pliku.'"');  
     $wiersz = mysql_fetch_object($wykonaj);
     $cena=$wiersz->Cena;
-
     $do_kiedy=$wiersz->Do_kiedy;
     if($wiersz->Wygrywajacy==$_SESSION['ID'])
         $wygrana="Wygrywasz tą licytacje";
@@ -12,10 +11,10 @@
 
 ?>
 <div id="a_graphics">
-    <img src="graphics/librac.jpg" >
+    <img src="graphics/case1.jpg" >
 </div>
 <div id="a_message">
-    <h3>KRÓTKOFALÓWKA</h3>
+    <h3>Obudowa</h3>
     cena: <?php echo $cena ?>zł     &emsp;	&emsp;<?php echo $wygrana ?>  
     <form method="post" action="dodawanie.php">
         <input type="number"  name="moja_cena" min="<?php echo $cena+1 ?>" size="6" required />

@@ -10,15 +10,21 @@
 <?php
 
 if(@$_POST["nowa_cena_licytacja"])	{
-	$cena=$_POST[moja_cena];
-	$ins = @mysql_query("UPDATE licytacje SET Cena='1',Wygrywajacy='".$cena."' WHERE Nazwa='Krotkofalowka' ");
+	$cena=@$_POST[moja_cena];
+	$id=$_SESSION['ID'];
+	$name=@$_POST[nazwa];
+	$data= date("Y-m-d H:i:s", mktime (date('H'),date('i'),date('s'),date('m'),date('d')+1,date('Y')));
+	$zapytanie ="UPDATE licytacje SET Cena='".$cena."',Wygrywajacy='".$id."', Do_kiedy='".$data."' WHERE Nazwa='".$name."' ";
+	$ins = @mysql_query($zapytanie);
 		if($ins){
-			header('Location: index.php');
+			$sciezka='Location: index.php?id=auction/'.$name.'';
+			header($sciezka);
 		}
 		else{
 			echo "Błąd nie udało się dodać nowego rekordu <br/>";
-			echo "UPDATE licytacje SET Cena='1',Wygrywajacy='1' WHERE Nazwa='Krotkofalowka' ";
+			echo $zapytanie;
 		}
+
 }
 else echo "nie powinno cię tu być"	 
 

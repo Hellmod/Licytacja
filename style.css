@@ -32,7 +32,7 @@ body{
 
 #content{
 	border: 2px solid #000000;
-	min-height: 300px;
+	min-height: 350px;
 }
 
 table{
@@ -75,4 +75,8 @@ table{
 	position: absolute;
 	left: 0;
 	right: 0;
+}
+
+#zostalo{
+	color: #ff0000;
 }

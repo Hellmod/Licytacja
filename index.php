@@ -2,6 +2,16 @@
 	session_start(); 
 	require_once('subpage/baza.php');	
 ?>
+<script>
+	function zmien_kolor(){
+		var kolor = document.forms['id_kolor'].kolor.value;
+		document.cookie = kolor;
+		document.body.style.background = document.cookie.substring(0, 7);
+	}
+	function zmien_kolor2(){
+		document.body.style.background = document.cookie.substring(0, 7);
+	}
+</script>
 <html>
 <head>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -83,16 +93,7 @@
 <form id="id_kolor" method="post" action="" style="	position: absolute;	left: 0;top: 0;">
 	<input type="color" name="kolor" value="#ffffff" onchange="zmien_kolor()"/>
 </form>
-<script>
-	function zmien_kolor(){
-		var kolor = document.forms['id_kolor'].kolor.value;
-		document.cookie = kolor;
-		document.body.style.background = document.cookie.substring(0, 7);
-	}
-	function zmien_kolor2(){
-		document.body.style.background = document.cookie.substring(0, 7);
-	}
-</script>
+
 
 </body>
 </html>

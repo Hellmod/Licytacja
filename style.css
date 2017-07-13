@@ -25,10 +25,31 @@ body{
 	text-align: center;
 }
 
-#menu{
+#topbar{
 	border: 2px solid #444444;
+	height: 45px;
 	
 }
+
+#menu{	
+	font-size: 15px;
+	float:left;
+}
+
+#menu a{
+	margin:2px;	
+	margin-left: 80;
+	margin-right: 80;
+	width: 100px;	
+	padding: 10px 20px 10px 20px;
+	border: 2px solid #0000aa;
+	border-radius: 6px;
+	color: #000000;
+	text-decoration: none;
+	display: block;
+	text-align:center;
+}
+
 
 #content{
 	border: 2px solid #000000;
@@ -80,3 +101,36 @@ table{
 #zostalo{
 	color: #ff0000;
 }
+
+.error{
+	color: #ff0000;
+}
+
+.r_forma{
+	margin-bottom: 5px;	
+	display: block;
+}
+
+.r_forma2{
+	margin-bottom: 9px;	
+	display: block;
+}
+
+#r_rejestracja{
+	width: 450px;
+	margin-left: auto;
+	margin-right: auto;	
+	margin-top: 70px;
+}
+
+#r_label{
+	margin-right: 10px;
+	float: left;
+	
+}
+
+#r_input{
+	float: left;	
+	
+}
+

@@ -3,6 +3,7 @@
 	require_once('subpage/baza.php');	
 ?>
 <script>
+	window.onload=zmien_kolor2;
 	function zmien_kolor(){
 		var kolor = document.forms['id_kolor'].kolor.value;
 		document.cookie = kolor;
@@ -26,7 +27,7 @@
 	<title>Licytacja</title>
 	<link rel="stylesheet" href="style.css" type="text/css">
 </head>
-<body onload="zmien_kolor2()">
+<body>
 <div id="container">
 
 <div id="topcontent">
@@ -35,14 +36,16 @@
 
 </div>
 <?php
-	if(isset($_POST['wyslij']))
-	{
-	$l=@$_POST["Login"];
-	$p=md5(@$_POST["Haslo"]);
+	if(isset($_POST['wyslij'])){
+		$l=@$_POST["Login"];
+		$p=md5(@$_POST["Haslo"]);
 		$q="SELECT * from user where LOGIN='".$l."' and PASSWORD='".$p."'";
 		$w=mysql_query($q);
 		$wiersz=@mysql_fetch_array($w);		
-		if(is_null($wiersz['LOGIN'])) echo 'zły login lub chasło';
+		if(is_null($wiersz['LOGIN'])){
+			echo "<script>alert('Zły login lub chasło')</script>";
+			goto a;
+		}
 		else 
 		{
 			$_SESSION['Login']=$_POST['Login'];
@@ -55,31 +58,37 @@
 			header('Location: index.php?id=subpage/Admin');
 		else if ($_SESSION['Typ']=='User')
 			header('Location: index.php?id=subpage/User');
-		else		
+		else{
 			header('Location: index.php?id=subpage/start');		
+		}
 	}
-	
-	else
-	{
-
+	else if(isset($_POST['Zarejestruj'])){
+		header('Location: index.php?id=subpage/rejestracja');
+	}
+	else if(isset($_POST['rejestracja'])){
+		
+	}
+	else{
+	a:
 ?>
 
 <div id="logowanie">
 
 		<?php
 			@$i=$_GET['id'];
-			if(isset($_SESSION['Login']))	require('wylogowywanie.php');
-			else 							require('log.php');		
+			if(isset($_SESSION['Login']))	require('subpage/wylogowywanie.php');
+			else 							require('subpage/log.php');		
 		?>
 </div>
 <?php	}	?>
 <div style="clear:both;"></div>
 
-<div id="menu">
-<a href="index.php?id=subpage/test">tset</a>
-<a href="index.php?id=subpage/downolad">downolad</a>
-<a href="index.php?id=subpage/start">licytacje</a>
+<div id="topbar">
+	<div id="menu"><a href="index.php?id=subpage/test">tset</a></div>
+	<div id="menu"><a href="index.php?id=subpage/konto">konto</a></div>
+	<div id="menu"><a href="index.php?id=subpage/start">licytacje</a></div>
 </div>
+
 	<div id="content">
 		<?php
 			@$i=$_GET['id'];

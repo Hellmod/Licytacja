@@ -1,7 +1,3 @@
-<?php
-	if ($_SESSION['Typ']!='User')
-			header('Location: index.php?id=subpage/start');
-?>
 <!-- -->
 	<div class="auction" onclick= "Location: index.php?id=Test">
 		<a href="index.php?id=auction/Krotkofalowka">

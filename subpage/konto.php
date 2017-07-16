@@ -9,6 +9,32 @@ function validate_pass(p,r) {
 }
 </script>
 
+<?php
+	$zapytanie ='SELECT Kod, email from User WHERE ID = "' .$_SESSION['ID']. '"' ;
+	$wykonaj=mysql_query($zapytanie);  
+    $wiersz = mysql_fetch_object($wykonaj);
+	$kod=$wiersz->Kod;
+	$email=$wiersz->email;
+	if($kod!=""){
+//----------------------------------
+?>
+<form method="post" action="" id="r_rejestracja" >
+	<div id="r_label">
+		<label for="pass" class="r_forma2">Kod z meila:</label>
+	</div>
+	<div id="r_input">
+		<input type="text" name="kod" id="pass" class="r_forma" required>		
+	</div>
+	<div style="clear: both;"></div>
+	<input type="submit" value="OK" name="EmailConf"/>
+</form>
+
+
+<?php
+//-----------------------------------
+	}
+?>
+
 <form method="post" action="" id="r_rejestracja" >
 	<div id="r_label">
 		<label for="pass" class="r_forma2">Nowe hasło:</label>
@@ -26,13 +52,22 @@ function validate_pass(p,r) {
 
 <form method="post" action="" id="r_rejestracja" >
 	<div id="r_label">
-		<label for="pass" class="r_forma2">Noew email:</label>
+		<label for="email" class="r_forma2">Nowy email:</label>
 	</div>
 	<div id="r_input">
-		<input type="email" name="email" id="pass" class="r_forma" required onchange="validate_pass('pass','repPass')" required>		
+		<input type="email" name="email" id="email" class="r_forma" required>		
 	</div>
 	<div style="clear: both;"></div>
 	<input type="submit" value="OK" name="EmailChange"/>
+</form>
+
+<form method="post" action="" id="r_rejestracja" >
+	<div id="r_label">
+		<label class="r_forma2">Wyślij jeszcze raz potwierdzenie email:</label>
+	</div>
+	<div id="r_input">
+		<input type="submit" value="OK" name="EmailSend"/>
+	</div>
 </form>
 
 <?php
@@ -58,5 +93,31 @@ function validate_pass(p,r) {
 			echo "<script>alert('Błąd podczas zmiany email skontaktuj się z administratorem')</script>";
 		} 
 	}
+	else if(isset($_POST['EmailConf'])){
+		if($kod==$_POST['kod']){
+			$zapytanie ="UPDATE `user` SET `kod` = '' WHERE `user`.`ID` = ".$_SESSION['ID'].";";
+			$ins = @mysql_query($zapytanie);
+			if($ins){
+				echo "<script>alert('Email potwierdzony')</script>";
+			}
+			else{
+				echo "<script>alert('Błąd podczas potwierdzania email'a skontaktuj się z administratorem')</script>";
+			} 
+		}
+		else{
+			echo "<script>alert('Kod nie poprawny spróbuj jeszcze raz')</script>";
+		} 
+	}
+	else if(isset($_POST['EmailSend'])){
+		$tytul = "Potwierdzenie meila licytacja";
+		$wiadomosc = "Kod: ".$kod;
+
+		// użycie funkcji mail
+		mail($email, $tytul, $wiadomosc);
+		echo "<script>alert('potwierdzenie zostało ponownie wysłane')</script>";
+	}
+
+	
+	
 
 ?>

@@ -1,4 +1,7 @@
 <?php
+    if ($_SESSION['Typ']!=="User")
+        header('Location: index.php?id=subpage/start');	
+        
     $nazwa_pliku="Obudowa";
     $wykonaj=mysql_query('SELECT Cena,Do_kiedy,Wygrywajacy from licytacje where Nazwa="'.$nazwa_pliku.'"');  
     $wiersz = mysql_fetch_object($wykonaj);

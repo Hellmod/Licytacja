@@ -86,7 +86,7 @@
 <div id="topbar">
 	<div id="menu"><a href="index.php?id=subpage/test">tset</a></div>
 	<div id="menu"><a href="index.php?id=subpage/konto">konto</a></div>
-	<div id="menu"><a href="index.php?id=subpage/start">licytacje</a></div>
+	<div id="menu"><a href="index.php?id=subpage/User">licytacje</a></div>
 </div>
 
 	<div id="content">

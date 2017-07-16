@@ -46,6 +46,7 @@ if(@$_POST["rejestracja"])	{
 	$login=$_POST['login'];
     $haslo=$_POST['pass'];
     $email=$_POST['email'];
+	$kod=losowy_ciag(4);
 	
 	
 	$zapytanie ='SELECT * from user where login = "' .$login. '"' ;
@@ -54,9 +55,14 @@ if(@$_POST["rejestracja"])	{
 	if($wiersz)
 		header('Location: index.php?id=subpage/loginistnieje');
 	else{
-		$zapytanie ="INSERT INTO `user` (`ID`, `LOGIN`, `PASSWORD`,`EMAIL`,`KOD`, `TYPE`) VALUES (NULL, '".$login."', '".md5($haslo)."','".$email."','".losowy_ciag(4)."', 'User');" ;
+		$zapytanie ="INSERT INTO `user` (`ID`, `LOGIN`, `PASSWORD`,`EMAIL`,`KOD`, `TYPE`) VALUES (NULL, '".$login."', '".md5($haslo)."','".$email."','".$kod."', 'User');" ;
 		$ins = @mysql_query($zapytanie);
 		if($ins){
+			$tytul = "Potwierdzenie meila licytacja";
+			$wiadomosc = "Kod: ".$kod;
+
+			// użycie funkcji mail
+			mail($email, $tytul, $wiadomosc);
 			echo "<script>alert('Konto zostało poprawnie zarejestrowane')</script>";
 		}
 		else{

@@ -10,6 +10,17 @@ function validate_pass(p,r) {
 </script>
 
 <?php
+function losowy_ciag($dlugosc){
+    $znaki= "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $losowy_ciag="";
+        for ($i=0; $i < $dlugosc; $i++)
+        {
+            $losowy_ciag .= substr($znaki, rand(0, strlen($znaki)-1), 1);
+        }
+    return $losowy_ciag;
+}
+
+
 	$zapytanie ='SELECT Kod, email from User WHERE ID = "' .$_SESSION['ID']. '"' ;
 	$wykonaj=mysql_query($zapytanie);  
     $wiersz = mysql_fetch_object($wykonaj);
@@ -20,13 +31,15 @@ function validate_pass(p,r) {
 ?>
 <form method="post" action="" id="r_rejestracja" >
 	<div id="r_label">
-		<label for="pass" class="r_forma2">Kod z meila:</label>
+		<label for="pass" class="r_forma2">Kod z emaila:</label>
 	</div>
 	<div id="r_input">
-		<input type="text" name="kod" id="pass" class="r_forma" required>		
+		<input type="text" name="kod" id="pass" class="r_forma">	
 	</div>
 	<div style="clear: both;"></div>
-	<input type="submit" value="OK" name="EmailConf"/>
+	<input type="submit" value="OK" name="EmailConf"/></br>
+	<input type="submit" value="Wyślij jeszcze raz kod potwierdzający email " name="EmailSend"/>	
+
 </form>
 
 
@@ -61,15 +74,6 @@ function validate_pass(p,r) {
 	<input type="submit" value="OK" name="EmailChange"/>
 </form>
 
-<form method="post" action="" id="r_rejestracja" >
-	<div id="r_label">
-		<label class="r_forma2">Wyślij jeszcze raz potwierdzenie email:</label>
-	</div>
-	<div id="r_input">
-		<input type="submit" value="OK" name="EmailSend"/>
-	</div>
-</form>
-
 <?php
 	if(isset($_POST['PassChange'])){
         $haslo=$_POST['pass'];
@@ -84,7 +88,15 @@ function validate_pass(p,r) {
 	}
 	else if(isset($_POST['EmailChange'])){
 		$email=$_POST['email'];
-       	$zapytanie ="UPDATE `user` SET `EMAIL` = '".$email."' WHERE `user`.`ID` = ".$_SESSION['ID'].";";
+		$zapytanie ='SELECT * from user where email = "' .$email. '"' ;
+		$wykonaj=mysql_query($zapytanie);  
+		$wiersz = mysql_fetch_object($wykonaj);
+		if($wiersz)
+			header('Location: index.php?id=subpage/emailistnieje');
+
+
+		
+       	$zapytanie ="UPDATE `user` SET `EMAIL` = '".$email."',`KOD`='".losowy_ciag(4)."' WHERE `user`.`ID` = ".$_SESSION['ID'].";";
 	    $ins = @mysql_query($zapytanie);
 		if($ins){
 			echo "<script>alert('Email zmieniony')</script>";
@@ -111,10 +123,8 @@ function validate_pass(p,r) {
 	else if(isset($_POST['EmailSend'])){
 		$tytul = "Potwierdzenie meila licytacja";
 		$wiadomosc = "Kod: ".$kod;
-
-		// użycie funkcji mail
 		mail($email, $tytul, $wiadomosc);
-		echo "<script>alert('potwierdzenie zostało ponownie wysłane')</script>";
+		echo "<script>alert('kod potwierdzający meil'a został ponownie wysłany')</script>";
 	}
 
 	

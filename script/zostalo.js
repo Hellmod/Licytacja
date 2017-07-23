@@ -1,8 +1,10 @@
 var data;
+var czyPow=true;
 
 function start(data){
 
 	this.data=data;
+
 	odliczanie();
 	
 }
@@ -12,7 +14,7 @@ function czy(element) {
 	return element;
 }
 function odliczanie(){
-
+	
 		var currentYear = data.substring(0,6);
 		var month = data.substring(7,9);
 		var day = data.substring(10,12);
@@ -26,6 +28,10 @@ function odliczanie(){
 		var msInADay = 24 * 60 * 60 * 1000; //1 dzień w milisekundach - to w nich przecież zwracany czas metodą getTime
 
 		var timeDifference = (uberImportantDate.getTime() - dateToday.getTime());
+	//	alert(timeDifference);
+		 if(timeDifference<0)
+			location.reload()	
+		 	
 
         var eDaysToDate = timeDifference / msInADay;
         var daysToDate = Math.floor(eDaysToDate);
@@ -44,39 +50,15 @@ function odliczanie(){
         var eSecondsToDate = Math.floor((eMinutesToDate - minutesToDate)*60);
         var secondsToDate = Math.floor(eSecondsToDate);
 		secondsToDate=czy(secondsToDate);
+	//	alert(eSecondsToDate);
 		
 		if(daysToDate>=1)
 			document.getElementById("zostalo").innerHTML = daysToDate+" dni do końca licytacji";
 		else
 			document.getElementById("zostalo").innerHTML = "Czas do końca licytacji: "+hoursToDate+":"+minutesToDate+":"+secondsToDate;
 		setTimeout("odliczanie()",1000);
-/*
-		var dzisiaj = new Date();
-		var rok = data.substring(0,6)-dzisiaj.getFullYear();
-
-		var miesiac = data.substring(7,9)-(dzisiaj.getMonth()+1);		
-
-		var dzien = data.substring(10,12)-dzisiaj.getDate();
-
-		var godzina = data.substring(12,15)-dzisiaj.getHours();
-		if(godzina<0) godzina="0";
-		else if (godzina<10) godzina = "0"+godzina;			
-		
-		var minuta = data.substring(16,18)-dzisiaj.getMinutes();
-		if(minuta<0) minuta="00";
-		else if (minuta<10) minuta = "0"+minuta;		
-
-		var sekunda = data.substring(19,22)-dzisiaj.getSeconds();
-		if(sekunda<0) sekunda="0";
-		else if (sekunda<10) sekunda = "0"+sekunda;		
-				
-		document.getElementById("zostalo").innerHTML = rok+"-"+miesiac+"-"+dzien+" "+godzina+":"+minuta+":"+sekunda;
-
-		//document.getElementById("zostalo").innerHTML = czasDoWydarzenia(data.substring(0,6), data.substring(7,9), data.substring(10,12), data.substring(12,15), data.substring(16,18), data.substring(19,22));
-
-		//alert(rok+"-"+miesiac+"-"+dzien+" "+godzina+":"+minuta+":"+sekunda);
-		
-*/		
-	}
+	
+	
+}
 
 	

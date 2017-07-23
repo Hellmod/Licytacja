@@ -48,22 +48,35 @@ if(@$_POST["rejestracja"])	{
     $email=$_POST['email'];
 	$kod=losowy_ciag(4);
 	
+	$temp=true;
 	
 	$zapytanie ='SELECT * from user where login = "' .$login. '"' ;
 	$wykonaj=mysql_query($zapytanie);  
     $wiersz = mysql_fetch_object($wykonaj);
-	if($wiersz)
+	if($wiersz){
+		$temp=false;
 		header('Location: index.php?id=subpage/loginistnieje');
-	else{
+	}
+
+	$zapytanie ='SELECT * from user where email = "' .$email. '"' ;
+	$wykonaj=mysql_query($zapytanie);  
+	$wiersz = mysql_fetch_object($wykonaj);
+	if($wiersz){
+		$temp=false;
+		header('Location: index.php?id=subpage/emailistnieje');
+	}
+
+	if($temp){
 		$zapytanie ="INSERT INTO `user` (`ID`, `LOGIN`, `PASSWORD`,`EMAIL`,`KOD`, `TYPE`) VALUES (NULL, '".$login."', '".md5($haslo)."','".$email."','".$kod."', 'User');" ;
 		$ins = @mysql_query($zapytanie);
 		if($ins){
 			$tytul = "Potwierdzenie meila licytacja";
 			$wiadomosc = "Kod: ".$kod;
-
-			// użycie funkcji mail
+				// użycie funkcji mail
 			mail($email, $tytul, $wiadomosc);
 			echo "<script>alert('Konto zostało poprawnie zarejestrowane')</script>";
+			//header('Location: subpage/index.php');
+
 		}
 		else{
 			echo "<script>alert('Błąd nie udało się dodać nowego konta skontaktuj się z Administratorem')</script>";

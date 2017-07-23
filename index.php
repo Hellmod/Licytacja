@@ -19,11 +19,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="content-type" content="text/html; charset=iso-8859-2" />
-	<meta http-equiv="reply-to" content="Adres_e-mail" />
-	<meta name="generator" content="WebSite PRO 4.3" />
-	<meta name="author" content="Autor_dokumentu" />
-	<meta name="description" content="Opis" />
+	<meta name="author" content="Rafał Miśkiewicz" />
 	<title>Licytacja</title>
 	<link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -75,8 +71,7 @@
 <div id="logowanie">
 
 		<?php
-			@$i=$_GET['id'];
-			if(isset($_SESSION['Login']))	require('subpage/wylogowywanie.php');
+			if(isset($_SESSION['ID']))	require('subpage/wylogowywanie.php');
 			else 							require('subpage/log.php');		
 		?>
 </div>
@@ -84,9 +79,11 @@
 <div style="clear:both;"></div>
 
 <div id="topbar">
+	<div id="menu"><a href="index.php?id=subpage/start">Home</a></div>
 	<div id="menu"><a href="index.php?id=subpage/test">tset</a></div>
-	<div id="menu"><a href="index.php?id=subpage/konto">konto</a></div>
+	<?php if(isset($_SESSION['ID'])) echo'<div id="menu"><a href="index.php?id=subpage/konto">konto</a></div>'?>  
 	<div id="menu"><a href="index.php?id=subpage/User">licytacje</a></div>
+	<?php if(@$_SESSION['Typ']=="Admin") echo'<div id="menu"><a href="index.php?id=subpage/Admin">Admin</a></div>'?>  
 </div>
 
 	<div id="content">

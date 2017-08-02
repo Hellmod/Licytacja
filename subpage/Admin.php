@@ -14,7 +14,7 @@
 
 Witaj adminie ;)
 
-<form method="post" action="" id="r_rejestracja" enctype=”multipart/form-data>
+<form method="post" action="" id="r_rejestracja" enctype="multipart/form-data">
 	<div id="r_label">
 		<label for="name" class="r_forma2">Nazwa:</label>
 		<label for="title" class="r_forma2">Tytuł:</label>		
@@ -41,11 +41,10 @@ Witaj adminie ;)
         $name=$_POST['name'];
 		$title=$_POST['title'];
 		$price=$_POST['price'];
-		$graphics=$_POST['graphics'];
 		$note=$_POST['note'];
 		$data=@$_POST["date"];			
 		$tab = explode("/", $data);		
-		$data= $tab[2].'-'.$tab[1].'-'.$tab[0].' 24:00:00';
+		$data= $tab[2].'-'.$tab[0].'-'.$tab[1].' 24:00:00';
 		$dataNow = date("Y-m-d H:i:s");
 
 		$zapytanie ='SELECT * from licytacje where Nazwa = "' .$name. '"' ;
@@ -54,20 +53,34 @@ Witaj adminie ;)
 		if($wiersz){
 			echo "<script>alert('Identyczna nazwa licytacji już istnieje')</script>";
 		}
-		else if($data<$dataNow)
+		else if($data<$dataNow){
 			echo "<script>alert('Data już mineła')</script>";
+			echo 'data obecna '.$dataNow.' data wybrana '.$data;
+		}
 		else{
 
-			// Napisać dodawanie pliku na serwer
-			echo 'Niestety plik z grafiką musisz na razie wrzucić ręcznie';
+			$file = $_FILES['graphics'];
+			$file_name=$file['name'];
+			$file_error=$file['error'];
+			$file_tmp=$file['tmp_name'];
+			
 
-			$zapytanie ="INSERT INTO `licytacje` (`ID`, `Tytul`, `Krotki_opis`, `Grafika`, `Nazwa`, `Cena`, `Do_kiedy`, `Wygrywajacy`) VALUES (NULL, '".$title."', '".$note."', '".$graphics."', '".$title."', '".$price."', '".$data."', '');" ;
+			if($file_error===0) {
+				$file_destitation='graphics/'.$file_name;
+				move_uploaded_file($file_tmp,$file_destitation);
+			}
+			else{
+				echo "<script>alert('Błąd podczas dodawania grafiki skontaktuj się z administratorem')</script>";
+				goto error;
+			}
+
+			$zapytanie ="INSERT INTO `licytacje` (`ID`, `Tytul`, `Krotki_opis`, `Grafika`, `Nazwa`, `Cena`, `Do_kiedy`, `Wygrywajacy`) VALUES (NULL, '".$title."', '".$note."', '".$file_name."', '".$title."', '".$price."', '".$data."', '');" ;
 			$ins = @mysql_query($zapytanie);
 			if($ins){
 				echo "<script>alert('Licytacja dodana')</script>";
 			}
 			else{
-				echo "<script>alert('Błąd podczas zminiony chasła skontaktuj się z administratorem')</script>";
+				echo "<script>alert('Błąd podczas dodawania licytacji skontaktuj się z administratorem')</script>";
 			} 
 
 //__________________Tworzenie pliku__________________________________
@@ -78,6 +91,9 @@ Witaj adminie ;)
 			fputs($fp,$dane);
 			fclose($fp);
 		}
+
+		error:
+
 	}
 
 ?>

@@ -33,12 +33,13 @@
 <div id="a_message">
     <h3><?php echo $Tytul; ?></h3>
     Aktualna cena: <?php echo $cena ?>zł     &emsp;	&emsp;<?php echo $wygrana ?>  
-    <form method="post" action="dodawanie.php">
+    <form method="post" action="dodawanie.php" <?php if(!isset($_SESSION['ID'])) echo 'style="display:none;" ' ?>>
         <input type="number"  name="moja_cena" min="<?php echo $cena+1 ?>" size="6" required />
         <input type="hidden" name="nazwa" value="<?php echo $nazwa_pliku ?>" />
         <input type="hidden" name="id" value="<?php echo $_SESSION['ID']?>" />
         <input type="submit" name="nowa_cena_licytacja" value="Wyślij">
     </form>
+    <?php if(!isset($_SESSION['ID'])) echo '</br> ' ?>
     Przewidywane zakończenie licytacji:<?php echo $do_kiedy ?><br/>
     <span id="zostalo"></span><br/>
     <hr/>

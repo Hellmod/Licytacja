@@ -1,11 +1,20 @@
 var data;
 var czyPow=true;
+var uberImportantDate
 
 function start(data){
 
-	this.data=data;
-
-	odliczanie();
+	//this.data=data;
+	var currentYear = data.substring(0,6);
+	var month = data.substring(7,9);
+	var day = data.substring(10,12);
+	var hours = data.substring(12,15);
+	var minutes = data.substring(16,18);
+	var seconds = data.substring(19,22);
+	uberImportantDate = new Date(currentYear, month-1, day, hours, minutes, seconds);
+	
+	if(uberImportantDate.getTime()>new Date().getTime())
+		odliczanie();
 	
 }
 
@@ -15,20 +24,16 @@ function czy(element) {
 }
 function odliczanie(){
 	
-		var currentYear = data.substring(0,6);
-		var month = data.substring(7,9);
-		var day = data.substring(10,12);
-		var hours = data.substring(12,15);
-		var minutes = data.substring(16,18);
-		var seconds = data.substring(19,22);
-		var dateToday = new Date();
+
+		
 
         //rok, miesiąc, dzień, godzina, minuta
-		var uberImportantDate = new Date(currentYear, month-1, day, hours, minutes, seconds);
+		
+		var dateToday = new Date();
 		var msInADay = 24 * 60 * 60 * 1000; //1 dzień w milisekundach - to w nich przecież zwracany czas metodą getTime
 
 		var timeDifference = (uberImportantDate.getTime() - dateToday.getTime());
-	//	alert(timeDifference);
+	
 		 if(timeDifference<0)
 			location.reload()	
 		 	

@@ -63,10 +63,13 @@ Witaj adminie ;)
 			$file_name=$file['name'];
 			$file_error=$file['error'];
 			$file_tmp=$file['tmp_name'];
+
+			$file_ext = explode('.',$file_name);
+			$file_ext = strtolower(end($file_ext));
 			
 
 			if($file_error===0) {
-				$file_destitation='graphics/'.$file_name;
+				$file_destitation='graphics/'.$name.'.'.$file_ext;
 				move_uploaded_file($file_tmp,$file_destitation);
 			}
 			else{
@@ -74,13 +77,14 @@ Witaj adminie ;)
 				goto error;
 			}
 
-			$zapytanie ="INSERT INTO `licytacje` (`ID`, `Tytul`, `Krotki_opis`, `Grafika`, `Nazwa`, `Cena`, `Do_kiedy`, `Wygrywajacy`) VALUES (NULL, '".$title."', '".$note."', '".$file_name."', '".$title."', '".$price."', '".$data."', '');" ;
+			$zapytanie ="INSERT INTO `licytacje` (`ID`, `Tytul`, `Krotki_opis`, `Grafika`, `Nazwa`, `Cena`, `Do_kiedy`, `Wygrywajacy`) VALUES (NULL, '".$title."', '".$note."', '".$name.'.'.$file_ext."', '".$name."', '".$price."', '".$data."', '');" ;
 			$ins = @mysql_query($zapytanie);
 			if($ins){
 				echo "<script>alert('Licytacja dodana')</script>";
 			}
 			else{
 				echo "<script>alert('Błąd podczas dodawania licytacji skontaktuj się z administratorem')</script>";
+				goto error;
 			} 
 
 //__________________Tworzenie pliku__________________________________

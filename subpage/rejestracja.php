@@ -19,7 +19,7 @@ function validate_pass(p,r) {
 	</div>
 	<div id="r_input">
 		<input type="text" name="login"  id="login" class="r_forma" required>
-		<input type="password" name="pass" id="pass" class="r_forma" required onchange="validate_pass('pass','repPass')" required>
+		<input type="password" name="pass" id="pass" class="r_forma" required required>
 		<input type="password" name="repPass" id="repPass" class="r_forma" style="display: inline ;"  required onchange="validate_pass('pass','repPass')">
 		<span id="ipass" class="error"></span>
 		<input type="email" name="email" id="email" class="r_forma" required>

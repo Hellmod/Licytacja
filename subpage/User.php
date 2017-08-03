@@ -20,7 +20,7 @@
 				</div>
 				<div id="a_message">
 					<h3><?php echo $_SESSION['tytul']; ?></h3>
-					aktualna cena: <?php echo $cena ?>zł &emsp;&emsp; <?php    if($data<$data2) echo 'przewydywany termin zakończenia:'.$do_kiedy;  else echo'Licytacja zakończyła się';?>
+					Aktualna cena: <?php echo $cena ?>zł &emsp;&emsp; <?php    if($data<$data2) echo 'przewydywany termin zakończenia licytacji:'.$do_kiedy;  else echo'Licytacja zakończyła się';?>
 					
 					
 					<hr/>

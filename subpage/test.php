@@ -18,6 +18,9 @@ TEST </br></br>
 		$file_tmp=$file['tmp_name'];
 		echo $file_name;
 
+		$file_ext = explode('.',$file_name);
+		$file_ext = strtolower(end($file_ext));
+
     	if($file_error===0) {
 			$file_destitation='graphics/'.$file_name;
 			move_uploaded_file($file_tmp,$file_destitation);

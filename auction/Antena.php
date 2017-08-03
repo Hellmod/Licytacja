@@ -33,19 +33,26 @@
 <div id="a_message">
     <h3><?php echo $Tytul; ?></h3>
     Aktualna cena: <?php echo $cena ?>zł     &emsp;	&emsp;<?php echo $wygrana ?>  
-    <form method="post" action="dodawanie.php">
-        <input type="number"  name="moja_cena" min="<?php echo $cena+1 ?>" size="6" required />
-        <input type="hidden" name="nazwa" value="<?php echo $nazwa_pliku ?>" />
-        <input type="hidden" name="id" value="<?php echo $_SESSION['ID']?>" />
-        <input type="submit" name="nowa_cena_licytacja" value="Wyślij">
-    </form>
+    <?php 
+    if(isset($_SESSION['ID'])){
+    ?>
+        <form method="post" action="dodawanie.php" >
+            <input type="number"  name="moja_cena" min="<?php echo $cena+1 ?>" size="6" required />
+            <input type="hidden" name="nazwa" value="<?php echo $nazwa_pliku ?>" />
+            <input type="hidden" name="id" value="<?php echo $_SESSION['ID']?>" />
+            <input type="submit" name="nowa_cena_licytacja" value="Wyślij">
+        </form>
+    <?php
+    }
+    ?>
+    <?php if(!isset($_SESSION['ID'])) echo '</br> ' ?>
     Przewidywane zakończenie licytacji:<?php echo $do_kiedy ?><br/>
     <span id="zostalo"></span><br/>
     <hr/>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. <br/>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. 
 </div>
-<script type="text/javascript" src="script/zostalo.js"></script>
+
 <!-- __________________________________-->
 <?php
     }
@@ -66,8 +73,11 @@
 ?>
 
 
-
+<script type="text/javascript" src="script/zostalo.js"></script>
 <script>
+
 window.onload = start("  <?php echo$data2 ?>   ");
+
+//alert("start startu");
 </script>
 

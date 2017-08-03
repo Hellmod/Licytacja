@@ -11,7 +11,6 @@
     $Tytul=$wiersz->Tytul;
     $data= date("Y-m-d H:i:s");
     $data2=  date("Y-m-d H:i:s", mktime (substr($do_kiedy,11,-6),substr($do_kiedy,14,-3),substr($do_kiedy,17),substr($do_kiedy,5,-12),substr($do_kiedy,8,-9),substr($do_kiedy,0,-15)));
-    //echo $data2.'_________'.$data;
     if($wiersz->Wygrywajacy==@$_SESSION['ID']){
         $wygrana="Twoja cena jest nawyższa";
         $wygrana2="Wygrałeś";
@@ -21,8 +20,10 @@
         $wygrana2="Licytacja zakończyła się";
     }
 ?>
+
 <div id="a_graphics">
-    <img src="graphics/<?php echo $grafika ?>">    
+    <a class="example-image-link" href="graphics/<?php echo $grafika ?>" data-lightbox="<?php echo $nazwa_pliku; ?>"><img class="example-image" src="graphics/<?php echo $grafika ?>" alt="<?php echo $nazwa_pliku; ?>" /></a>
+    <!--<img src="graphics/<?php //echo $grafika ?>">    -->
 </div>
 
 
@@ -48,11 +49,7 @@
     <?php if(!isset($_SESSION['ID'])) echo '</br> ' ?>
     Przewidywane zakończenie licytacji:<?php echo $do_kiedy ?><br/>
     <span id="zostalo"></span><br/>
-    <hr/>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. <br/>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. 
 </div>
-
 <!-- __________________________________-->
 <?php
     }
@@ -62,22 +59,22 @@
 <div id="a_message">
     <h3><?php echo $Tytul; ?></h3>
     Aktualna cena: <?php echo $cena ?>zł     &emsp;	&emsp;<?php echo $wygrana2 ?>  
-    <hr/>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. <br/>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. 
 </div>
-
 <!-- __________________________________-->
 <?php
     }
 ?>
+<div id="tresc">
+    <hr/>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. <br/>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. 
+    <br/>
+    <a class="example-image-link" href="graphics/case1.jpg" data-lightbox="<?php echo $nazwa_pliku; ?>"><img height="150px" class="example-image" src="graphics/case1.jpg" alt="<?php echo $nazwa_pliku; ?>" /></a>
 
+    <a class="example-image-link" href="graphics/1.png" data-lightbox="<?php echo $nazwa_pliku; ?>"><img height="150px" class="example-image" src="graphics/1.png" alt="<?php echo $nazwa_pliku; ?>" /></a>
+</div>
 
 <script type="text/javascript" src="script/zostalo.js"></script>
 <script>
-
 window.onload = start("  <?php echo$data2 ?>   ");
-
-//alert("start startu");
 </script>
-

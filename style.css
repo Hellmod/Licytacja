@@ -85,12 +85,17 @@ table{
 #a_message{
 	float: left;
 	width:700px;
+	height:140px;
 	padding: 5px;
 }
 
 #a_message h3{
 	margin-bottom: 5px;
 	margin-top: 10px;
+}
+
+#tresc{
+	clear:both;
 }
 
 #a_web{
@@ -134,4 +139,3 @@ table{
 	float: left;	
 	
 }
-

@@ -19,6 +19,8 @@
 	<meta name="author" content="Rafał Miśkiewicz" />
 	<title>Licytacja</title>
 	<link rel="stylesheet" href="style.css" type="text/css">
+	<link rel="stylesheet" href="dist/css/lightbox.min.css">
+	<script src="dist/js/lightbox-plus-jquery.min.js"></script>
 </head>
 <body>
 <div id="container">
